@@ -6,6 +6,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -45,19 +46,36 @@ public class PasoAProduccion extends HorizontalLayout {
             }
         }
 
+        VerticalLayout layoutNavarro = new VerticalLayout();
+        Label tituloNavarro = new Label("Navarro");
+
         Grid<Orden> grid1 = new Grid<>();
         grid1.addColumn(Orden::getNumero).setHeader("Número");
         grid1.setItems(orden1);
+
+        layoutNavarro.add(tituloNavarro, grid1);
+
+
+        VerticalLayout layoutHector = new VerticalLayout();
+        Label tituloHector= new Label("Hector");
 
         Grid<Orden> grid5 = new Grid<>();
         grid5.addColumn(Orden::getNumero).setHeader("Número");
         grid5.setItems(orden5);
 
+        layoutHector.add(tituloHector, grid5);
+
+
+        VerticalLayout layoutGerman = new VerticalLayout();
+        Label tituloGerman= new Label("German");
+
         Grid<Orden> grid7 = new Grid<>();
         grid7.addColumn(Orden::getNumero).setHeader("Número");
         grid7.setItems(orden7);
 
-        add(grid1, grid5, grid7);
+        layoutGerman.add(tituloGerman, grid7);
+
+        add(layoutNavarro, layoutHector, layoutGerman);
 
 
 
