@@ -20,7 +20,7 @@ import java.util.List;
 
 @PageTitle("Paso a Produccion")
 @Route(value = "produccion", layout = MainLayout.class)
-public class PasoAProduccion extends HorizontalLayout {
+public class PasoAProduccion extends VerticalLayout {
 
     public PasoAProduccion() {
 
@@ -33,15 +33,19 @@ public class PasoAProduccion extends HorizontalLayout {
 
 
         List<Orden> orden1 = new ArrayList<>();
+        List<Orden> orden3 = new ArrayList<>();
         List<Orden> orden5 = new ArrayList<>();
         List<Orden> orden7 = new ArrayList<>();
 
         for (Orden orden : Orden.listaProduccion){
             if (orden.getNumero() == 1){
                 orden1.add(orden);
+            } else if (orden.getNumero() == 3) {
+                orden3.add(orden);
             } else if (orden.getNumero() == 5) {
                 orden5.add(orden);
-            }else if (orden.getNumero() == 7) {
+            }
+            else if (orden.getNumero() == 7) {
                 orden7.add(orden);
             }
         }
@@ -51,9 +55,21 @@ public class PasoAProduccion extends HorizontalLayout {
 
         Grid<Orden> grid1 = new Grid<>();
         grid1.addColumn(Orden::getNumero).setHeader("Número");
+        //add column tiempo también
         grid1.setItems(orden1);
 
+
         layoutNavarro.add(tituloNavarro, grid1);
+
+
+        VerticalLayout layoutPaco = new VerticalLayout();
+        Label tituloPaco = new Label("Paco");
+
+        Grid<Orden> grid3 = new Grid<>();
+        grid3.addColumn(Orden::getNumero).setHeader("Número");
+        grid3.setItems(orden1);
+
+        layoutPaco.add(tituloPaco, grid3);
 
 
         VerticalLayout layoutHector = new VerticalLayout();
@@ -75,7 +91,22 @@ public class PasoAProduccion extends HorizontalLayout {
 
         layoutGerman.add(tituloGerman, grid7);
 
-        add(layoutNavarro, layoutHector, layoutGerman);
+
+        //Poner debajo de cada grid
+        grid1.setWidth("300px");
+        grid3.setWidth("300px");
+        grid5.setWidth("300px");
+        grid7.setWidth("300px");
+
+
+        HorizontalLayout fila1 = new HorizontalLayout(layoutNavarro, layoutPaco);
+        HorizontalLayout fila2 = new HorizontalLayout(layoutHector, layoutGerman);
+
+
+
+        add(fila1, fila2);
+
+
 
 
 
