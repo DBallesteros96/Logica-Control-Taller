@@ -12,6 +12,8 @@ import com.vaadin.flow.component.html.Footer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.theme.lumo.LumoUtility;
@@ -58,9 +60,11 @@ public class MainLayout extends AppLayout {
         AppNav nav = new AppNav();
 
         nav.addItem(new AppNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new AppNavItem("Formulario", Formulario.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new AppNavItem("Muestra", Muestra.class, LineAwesomeIcon.FILE.create()));
-        nav.addItem(new AppNavItem("Produccion", PasoAProduccion.class, LineAwesomeIcon.FILE.create()));
+        nav.addItem(new AppNavItem("Formulario", Formulario.class, VaadinIcon.INPUT.create()));
+        nav.addItem(new AppNavItem("Muestra", Muestra.class, VaadinIcon.FORM.create()));
+        nav.addItem(new AppNavItem("Produccion", PasoAProduccion.class, VaadinIcon.HAMMER.create()));
+
+        //Icon iconoPrueba = new Icon(VaadinIcon.HAMMER);
 
         return nav;
     }
