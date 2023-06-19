@@ -56,11 +56,26 @@ public class PasoAProduccion extends VerticalLayout {
         Grid<Orden> grid1 = new Grid<>();
         grid1.addColumn(Orden::getNumero).setHeader("Número");
         //add column tiempo también
+        //Columna añadida para poder marcar las ordenes terminadas y que se borren automáticamente al marcarlas
+        //Se añadirán a una lista de ordenes terminadas y se mostrarán en otra pestaña todas en un grid
+        //En ese grid solo se mostrara el códigoOT, el montador y las fechas
+        grid1.addComponentColumn(orden -> {
+            Checkbox checkbox = new Checkbox();
+            checkbox.setValue(orden.isOrdenTerminada());
+            checkbox.addValueChangeListener(event -> {
+                boolean value = event.getValue();
+                orden.setOrdenTerminada(value);
+                if(orden.isOrdenTerminada()){
+                    Orden.listaOrdenesCompletadas.add(orden);
+                    orden1.remove(orden);
+                    grid1.setItems(orden1);
+                }
+            });
+            return checkbox;
+        }).setHeader("Orden Finalizada");
         grid1.setItems(orden1);
 
-
         layoutNavarro.add(tituloNavarro, grid1);
-
 
         VerticalLayout layoutPaco = new VerticalLayout();
         Label tituloPaco = new Label("Paco");
